@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2568918555256642667}
   - component: {fileID: 2568918555256642666}
+  - component: {fileID: 1736877296}
   m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
@@ -126,7 +127,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.7311321, g: 0.83554834, b: 1, a: 1}
+  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightOuterRadius: 6
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -188,6 +189,22 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!58 &1736877296
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2568918555256642661}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 6
 --- !u!1 &2568918555496860957
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,9 +453,9 @@ GameObject:
   - component: {fileID: 2568918556182406594}
   - component: {fileID: 2568918556182406595}
   - component: {fileID: 708320098}
-  m_Layer: 0
-  m_Name: Fish_1
-  m_TagString: Untagged
+  m_Layer: 3
+  m_Name: Fish
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -505,7 +522,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 68cb5e2ccb7ce1340bfe08030c9cb54f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5230064, g: 0.60766524, b: 0.6886792, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -572,10 +589,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163e3f7376cceecbf839195e323ff2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 300
+  turnSpeed: 200
   moveSpeed: 2000
   fishMemory: 2
   tail: 5
+  shoalRadius: 8
   cola: {fileID: 2568918555496861024}
   lt: {fileID: 2568918555256642666}
 --- !u!61 &708320098
