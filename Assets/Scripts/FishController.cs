@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+
 public class FishController : MonoBehaviour
 {
-  public Texture2D cursorTexture;
   Vector2 mousePosition;
   Vector2 direction;
   float angle;
@@ -12,15 +12,11 @@ public class FishController : MonoBehaviour
   public float turnSpeed;
   public float moveSpeed;
   Rigidbody2D rb;
-  public Rigidbody2D projectile;
-  public float bulletSpeed;
-  public Transform playerLight;
+  //public Transform playerLight;
   public Light2D lt;
   // Start is called before the first frame update
   void Start()
   {
-    // Set custom cursor
-    //Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     rb = GetComponent<Rigidbody2D>();
   }
 
@@ -32,21 +28,16 @@ public class FishController : MonoBehaviour
     mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     // Get the direction of the mouse relative to the player and rotate the player to said direction
     direction = mousePosition - (Vector2)transform.position;
-    angle = Vector2.SignedAngle(-transform.up, direction);
+    angle = Vector2.SignedAngle(transform.right, direction);
     impulse = angle * Mathf.Deg2Rad * turnSpeed * rb.inertia;
     rb.AddTorque(impulse, ForceMode2D.Force);
 
-    if (Input.GetKeyDown(KeyCode.Mouse0))
-    {
-      Rigidbody2D bullet = Instantiate(projectile, transform.position, transform.rotation);
-      bullet.velocity = rb.velocity + ((Vector2)transform.up * -bulletSpeed);
-    }
     if (Input.GetKey(KeyCode.Mouse1))
     {
-      rb.AddForce(-(Vector2)transform.up * moveSpeed * Time.deltaTime);
+      rb.AddForce((Vector2)transform.right * moveSpeed * Time.deltaTime);
     }
-    playerLight.transform.position = transform.position;
-    lt.intensity = 0.7f + Mathf.PingPong(Time.time / 8, 0.3f);
+    //playerLight.transform.position = transform.position;
+    lt.intensity = 0.3f + Mathf.PingPong(Time.time / 2, 0.7f);
   }
 
   //private void OnTriggerEnter2D(Collider2D collision){
