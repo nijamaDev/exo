@@ -18,6 +18,7 @@ public class FishController : MonoBehaviour
 
     Rigidbody2D rb;
     private int fishClose = 0;
+    private int foodClose = 0;
     private bool rotar = true;
     private bool flutter = true;
     private bool flutter_dir = true;
@@ -36,39 +37,69 @@ public class FishController : MonoBehaviour
         {
             fishClose++;
         }
+
+        if (collider.CompareTag("Plancton"))
+        {
+            foodClose++;
+        }
+
     }
 
+    /*
+     
+     */
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.CompareTag("Fish"))
+        if(collider.attachedRigidbody != null)
         {
-            //Debug.Log("rb"+rb.position);
-            //Debug.Log("col"+collider.GetComponent<Rigidbody2D>().position);
-            //Debug.Log("Vector" + (collider.GetComponent<Rigidbody2D>().position - rb.position));
-            Vector2 posn = collider.GetComponent<Rigidbody2D>().position;
-            Vector2 pos0 = rb.position;
-            float m = Mathf.Sqrt(
+            Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
+            Vector2 pos0 = transform.position;//rb.position;//
+
+            if (foodClose == 0 && collider.CompareTag("Fish"))
+            {
+                //Vector2 posn = collider.GetComponent<Rigidbody2D>().position;
+                //Vector2 pos0 = rb.position;
+
+                //Debug.Log("rb"+rb.position);
+                //Debug.Log("col"+collider.GetComponent<Rigidbody2D>().position);
+                //Debug.Log("Vector" + (collider.GetComponent<Rigidbody2D>().position - rb.position));
+
+
+                float m = Vector2.Distance(posn, pos0);
+                /*
+                 Mathf.Sqrt(
                 Mathf.Pow(posn.x + pos0.x, 2) +
                 Mathf.Pow(posn.y + pos0.y, 2)) -
                 Mathf.Sqrt(
                 Mathf.Pow(pos0.x, 2) +
                 Mathf.Pow(pos0.y, 2));
-            //Si ta lejos se acerca
-            //Debug.Log(m);
-            if (m > shoalRadius)
+                 */
+
+                //Si ta lejos se acerca
+                //Debug.Log(m);
+                
+                if (m > shoalRadius)
+                {
+                    direction = posn - pos0;
+                }
+                else if (fishClose > 0)
+                { //TODO
+                    posn = collider.GetComponent<Rigidbody2D>().position;
+                    Vector2 back = collider.transform.GetChild(2).position;
+                    //Debug.Log("cardumen!");
+                    direction = posn - back;
+                }
+                 
+
+            }
+
+            if (collider.CompareTag("Plancton"))
             {
+                //Vector2 posn = collider.GetComponent<Rigidbody2D>().position;
+                //Vector2 pos0 = rb.position;
                 direction = posn - pos0;
             }
-            else if(fishClose>1)
-            { //TODO
-
-                Vector2 back = collider.transform.GetChild(2).position;
-                Debug.Log("cardumen!");
-                direction = posn - back;
-            }
-            
-            
-        }
+        }     
     }
 
     private void OnTriggerExit2D(Collider2D collider)
@@ -77,7 +108,13 @@ public class FishController : MonoBehaviour
         {
             fishClose--;
         }
+
+        if (collider.CompareTag("Plancton"))
+        {
+            foodClose--;
+        }
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -127,16 +164,16 @@ public class FishController : MonoBehaviour
     IEnumerator changeFlutter()
     {
         //Wait for fishMemory seconds
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         angle = Vector2.SignedAngle(transform.up, direction);
         //Debug.Log("Vector: (" + direction.x + "," + direction.y + ")");
         if (flutter_dir) {
             //Debug.Log("Der: (" + Mathf.Sin(Mathf.Deg2Rad * 45f) + ")");
-            angle = angle + 90;
+            angle = angle + 135;
         }
         else {
             //Debug.Log("Izq: (" + direction.x + "," + direction.y + ")");
-            angle = angle - 90;
+            angle = angle - 135;
         }
         //angle = angle - 90 + Mathf.PingPong(Time.time,180);
         impulse = angle * Mathf.Deg2Rad * tail;

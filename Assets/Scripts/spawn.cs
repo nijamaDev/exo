@@ -14,6 +14,7 @@ public class spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Instantiate(fish, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(fish, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        go.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 }

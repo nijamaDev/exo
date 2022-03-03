@@ -69,7 +69,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.0000000074505797, y: 0.78009963}
+  m_ConnectedAnchor: {x: 0.000000104308114, y: 0.7800996}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  m_Color: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.33333334}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -252,7 +252,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 5
+  m_AngularDrag: 25
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -274,15 +274,15 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.5885569, y: 0.00000046566117}
+  m_ConnectedAnchor: {x: 0.58855665, y: 0.00000036880365}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 30
-    m_UpperAngle: -30
+    m_LowerAngle: 40
+    m_UpperAngle: -40
 --- !u!1 &2568918555738030986
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +352,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.39351752, y: -0.0034822961}
+  m_ConnectedAnchor: {x: 0.39351788, y: -0.0034822142}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -430,7 +430,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.33082765, y: 0.0034825783}
+  m_ConnectedAnchor: {x: 0.3308274, y: 0.0034823641}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -569,7 +569,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 2
+  m_LinearDrag: 10
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -589,11 +589,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163e3f7376cceecbf839195e323ff2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 200
-  moveSpeed: 2000
+  turnSpeed: 500
+  moveSpeed: 8000
   fishMemory: 2
   tail: 5
-  shoalRadius: 8
+  shoalRadius: 4.5
   cola: {fileID: 2568918555496861024}
   lt: {fileID: 2568918555256642666}
 --- !u!61 &708320098
@@ -609,7 +609,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000017374754, y: 0.6482424}
+  m_Offset: {x: 0.0005108565, y: 0.6482424}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 1}
@@ -620,5 +620,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4887725, y: 0.6191021}
+  m_Size: {x: 0.48588142, y: 0.6191021}
   m_EdgeRadius: 0
