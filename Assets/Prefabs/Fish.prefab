@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2568918554381860902}
   - component: {fileID: 2568918554381860896}
   - component: {fileID: 2568918554381860897}
-  m_Layer: 0
+  - component: {fileID: 643489617}
+  m_Layer: 6
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +70,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.000000104308114, y: 0.7800996}
+  m_ConnectedAnchor: {x: 0, y: 0.78009963}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -78,6 +79,22 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 10
     m_UpperAngle: -10
+--- !u!58 &643489617
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2568918554381860899}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.7778766, y: -0.018174523}
+  serializedVersion: 2
+  m_Radius: 1.1979003
 --- !u!1 &2568918555256642661
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +291,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.58855665, y: 0.00000036880365}
+  m_ConnectedAnchor: {x: 0.58855665, y: 0.0000005168566}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -352,7 +369,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.39351788, y: -0.0034822142}
+  m_ConnectedAnchor: {x: 0.3935179, y: -0.0034823236}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -430,7 +447,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.3308274, y: 0.0034823641}
+  m_ConnectedAnchor: {x: 0.33082727, y: 0.00348253}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -595,6 +612,7 @@ MonoBehaviour:
   tail: 5
   shoalRadius: 4.5
   cola: {fileID: 2568918555496861024}
+  shoal: {fileID: 643489617}
   lt: {fileID: 2568918555256642666}
 --- !u!61 &708320098
 BoxCollider2D:

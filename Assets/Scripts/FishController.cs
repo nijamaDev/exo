@@ -15,8 +15,10 @@ public class FishController : MonoBehaviour
     public float tail;//que tan fuerte mueve la cola
     public float shoalRadius = 12;
     public Rigidbody2D cola;
+    public CircleCollider2D shoal;
 
     Rigidbody2D rb;
+    private int shoalClose = 0;
     private int fishClose = 0;
     private int foodClose = 0;
     private bool rotar = true;
@@ -32,10 +34,19 @@ public class FishController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    public int getShoalClose()
+    {
+        return shoalClose;
+    }
+
     private void OnTriggerEnter2D(Collider2D collider) {
         if (collider.CompareTag("Fish"))
         {
             fishClose++;
+            if (collider.IsTouching(shoal))
+            {
+                shoalClose++;
+            }
         }
 
         if (collider.CompareTag("Plancton"))
@@ -43,6 +54,7 @@ public class FishController : MonoBehaviour
             foodClose++;
         }
 
+        
     }
 
     /*
@@ -57,28 +69,17 @@ public class FishController : MonoBehaviour
 
             if (foodClose == 0 && collider.CompareTag("Fish"))
             {
-                //Vector2 posn = collider.GetComponent<Rigidbody2D>().position;
-                //Vector2 pos0 = rb.position;
-
-                //Debug.Log("rb"+rb.position);
-                //Debug.Log("col"+collider.GetComponent<Rigidbody2D>().position);
-                //Debug.Log("Vector" + (collider.GetComponent<Rigidbody2D>().position - rb.position));
-
-
-                float m = Vector2.Distance(posn, pos0);
+                //Si ta lejos se acerca
+                //Debug.Log(m);
                 /*
+                 float m = Vector2.Distance(posn, pos0);
                  Mathf.Sqrt(
                 Mathf.Pow(posn.x + pos0.x, 2) +
                 Mathf.Pow(posn.y + pos0.y, 2)) -
                 Mathf.Sqrt(
                 Mathf.Pow(pos0.x, 2) +
                 Mathf.Pow(pos0.y, 2));
-                 */
-
-                //Si ta lejos se acerca
-                //Debug.Log(m);
-                
-                if (m > shoalRadius)
+                 if (m > shoalRadius)
                 {
                     direction = posn - pos0;
                 }
@@ -89,7 +90,17 @@ public class FishController : MonoBehaviour
                     //Debug.Log("cardumen!");
                     direction = posn - back;
                 }
-                 
+                 */
+                if (shoalClose <= collider.GetComponent<FishController>().getShoalClose())
+                {
+                    direction = posn - pos0;
+                }
+                else {//SIno seguir al cardumen
+                    posn = collider.GetComponent<Rigidbody2D>().position;
+                    Vector2 back = collider.transform.GetChild(2).position;
+                    //Debug.Log("cardumen!");
+                    direction = posn - back;
+                }
 
             }
 
@@ -107,6 +118,10 @@ public class FishController : MonoBehaviour
         if (collider.CompareTag("Fish"))
         {
             fishClose--;
+            if (collider.IsTouching(shoal))
+            {
+                shoalClose--;
+            }
         }
 
         if (collider.CompareTag("Plancton"))
