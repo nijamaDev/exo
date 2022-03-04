@@ -27,7 +27,7 @@ public class FishController : MonoBehaviour
 
     //public Transform playerLight;
     public Light2D lt;
-  // Start is called before the first frame update
+    // Start is called before the first frame update
 
     void Start()
     {
@@ -55,9 +55,7 @@ public class FishController : MonoBehaviour
         if (collider.CompareTag("Plancton"))
         {
             foodClose++;
-        }
-
-        
+        }        
     }
 
    
@@ -70,39 +68,16 @@ public class FishController : MonoBehaviour
 
             if (foodClose == 0 && collider.CompareTag("Fish"))
             {
-                //Si ta lejos se acerca
-                //Debug.Log(m);
-                /*
-                 float m = Vector2.Distance(posn, pos0);
-                 Mathf.Sqrt(
-                Mathf.Pow(posn.x + pos0.x, 2) +
-                Mathf.Pow(posn.y + pos0.y, 2)) -
-                Mathf.Sqrt(
-                Mathf.Pow(pos0.x, 2) +
-                Mathf.Pow(pos0.y, 2));
-                 if (m > shoalRadius)
-                {
-                    direction = posn - pos0;
-                }
-                else if (fishClose > 0)
-                { //TODO
-                    posn = collider.GetComponent<Rigidbody2D>().position;
-                    Vector2 back = collider.transform.GetChild(2).position;
-                    //Debug.Log("cardumen!");
-                    direction = posn - back;
-                }
-                 */
                 if (fishClose != 1 && shoalClose <= collider.GetComponent<FishController>().getShoalClose())
-                // Si el cardumen de otro pez tiene más peces que el propio...
+                // Si el cardumen de otro pez tiene mï¿½s peces que el propio...
                 {
-                    // Se dirige hacia el "líder".
+                    // Se dirige hacia el "lï¿½der".
                     direction = posn - pos0;
                 }
                 else {//SIno seguir al cardumen
                     
                     Vector2 dirF = collider.GetComponent<Rigidbody2D>().position;
-                    Vector2 back = collider.transform.GetChild(2).position;
-                    
+                    Vector2 back = collider.transform.GetChild(2).position;                    
                     //Debug.Log("cardumen!");
                     //direction = posn - back;
                     direction = direction - (posn - pos0);
@@ -179,7 +154,7 @@ public class FishController : MonoBehaviour
     {
         //Wait for fishMemory seconds
         yield return new WaitForSeconds(fishMemory);
-        //Debug.Log("Cambié la dirección: ");
+        //Debug.Log("Cambiï¿½ la direcciï¿½n: ");
         direction = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
 
         rotar = true;
