@@ -16,7 +16,8 @@ public class FishController : MonoBehaviour
     public float shoalRadius = 12;
     public Rigidbody2D cola;
     public CircleCollider2D shoal;
-    public float hunger = 30;
+    public float hunger = 50;
+    public float minHunger = 15;
 
     Rigidbody2D rb;
     private float maxHunger;
@@ -60,44 +61,40 @@ public class FishController : MonoBehaviour
         {
             foodClose++;
         }
+
     }
 
-   
     private void OnTriggerStay2D(Collider2D collider)
     {
         if(collider.attachedRigidbody != null)
         {
-            Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
-            Vector2 pos0 = transform.position;//rb.position;//
-
-            if (foodClose == 0 && collider.CompareTag("Fish"))
+            if (hunger > minHunger)
+            //Si no tienen hambre, forman un cardumen.
             {
-                if (fishClose != 1 && shoalClose <= collider.GetComponent<FishController>().getShoalClose())
-                // Si el cardumen de otro pez tiene m�s peces que el propio...
+                if (collider.CompareTag("Fish"))
                 {
-                    // Se dirige hacia el "l�der".
-                    direction = posn - pos0;
+                    shoalBehaviour(collider);
                 }
-                else {//SIno seguir al cardumen
-                    
-                    Vector2 dirF = collider.GetComponent<Rigidbody2D>().position;
-                    Vector2 back = collider.transform.GetChild(2).position;                    
-                    //Debug.Log("cardumen!");
-                    //direction = posn - back;
-                    direction = direction - (posn - pos0);
-                    //(dirF - back) (posn - pos0)
-                }
-
             }
-
-            if (hunger < maxHunger && collider.CompareTag("Plancton"))
+            else
+            //Si están hambrientos, su comportamiento depende de si hay comida cerca o no.
             {
-                hunger++;
-                //El HAMBRE se puede ajustar posteriormente.
-                if (hunger < maxHunger - 10)
+                if (foodClose == 0)
+                //Si hay comida cerca, se vuelven unos bastardos egoístas.
                 {
-                    direction = posn - pos0;
-                }                
+                    if (collider.CompareTag("Fish"))
+                    {
+                        shoalBehaviour(collider);
+                    }
+                }
+                else
+                //Si no hay, se mantiene cerca del cardumen para sobrevivir.
+                {
+                    if (collider.CompareTag("Plancton"))
+                    {
+                        foodBehaviour(collider);
+                    }
+                }
             }
         }     
     }
@@ -211,12 +208,53 @@ public class FishController : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            UnityEngine.Object.Destroy(gameObject);
         }
 
         isHungry = true;
     }
 
+    //Comportamiento en cardumen.
+    private void shoalBehaviour(Collider2D collider)
+    {
+        Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
+        Vector2 pos0 = transform.position;//rb.position;//
+        //Comportamiento de cardumen.
+        if (fishClose != 1 && shoalClose <= collider.GetComponent<FishController>().getShoalClose())
+        // Si el cardumen de otro pez tiene m�s peces que el propio...
+        {
+            // Se dirige hacia el "l�der".
+            direction = posn - pos0;
+        }
+        else
+        {//SIno seguir al cardumen
+
+            Vector2 dirF = collider.GetComponent<Rigidbody2D>().position;
+            Vector2 back = collider.transform.GetChild(2).position;
+            //Debug.Log("cardumen!");
+            //direction = posn - back;
+            direction = direction - (posn - pos0);
+            //(dirF - back) (posn - pos0)
+        }
+    }
+
+    //Comportamiento con Plancton.
+    private void foodBehaviour(Collider2D collider)
+    {
+        Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
+        Vector2 pos0 = transform.position;//rb.position;//
+        //Ir por comida
+        //Si el plancton está tocando la nuca, el pez come.
+        if (collider.IsTouching(shoal))
+        {
+            hunger = hunger + 20;
+        }
+        //El HAMBRE se puede ajustar posteriormente.
+        if (hunger < minHunger)
+        {
+            direction = posn - pos0;
+        }
+    }
 
 
     //private void OnTriggerEnter2D(Collider2D collision){

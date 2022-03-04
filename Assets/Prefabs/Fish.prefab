@@ -614,6 +614,8 @@ MonoBehaviour:
   shoalRadius: 4.5
   cola: {fileID: 2568918555496861024}
   shoal: {fileID: 643489617}
+  hunger: 50
+  minHunger: 10
   lt: {fileID: 2568918555256642666}
 --- !u!61 &708320098
 BoxCollider2D:
@@ -653,6 +655,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75652dd366797f044be7ba92909c6e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishColor:
+  colorAllele:
   - A
   - a
+  speedAllele:
+  - S
+  - s
