@@ -16,12 +16,15 @@ public class FishController : MonoBehaviour
     public float shoalRadius = 12;
     public Rigidbody2D cola;
     public CircleCollider2D shoal;
+    public float hunger = 30;
 
     Rigidbody2D rb;
+    private float maxHunger;
     private int shoalClose = 0;
     private int fishClose = 0;
     private int foodClose = 0;
     private bool rotar = true;
+    private bool isHungry = true;
     private bool flutter = true;
     private bool flutter_dir = true;
 
@@ -31,6 +34,7 @@ public class FishController : MonoBehaviour
 
     void Start()
     {
+        maxHunger = hunger;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -55,7 +59,7 @@ public class FishController : MonoBehaviour
         if (collider.CompareTag("Plancton"))
         {
             foodClose++;
-        }        
+        }
     }
 
    
@@ -86,11 +90,14 @@ public class FishController : MonoBehaviour
 
             }
 
-            if (collider.CompareTag("Plancton"))
+            if (hunger < maxHunger && collider.CompareTag("Plancton"))
             {
-                //Vector2 posn = collider.GetComponent<Rigidbody2D>().position;
-                //Vector2 pos0 = rb.position;
-                direction = posn - pos0;
+                hunger++;
+                //El HAMBRE se puede ajustar posteriormente.
+                if (hunger < maxHunger - 10)
+                {
+                    direction = posn - pos0;
+                }                
             }
         }     
     }
@@ -132,12 +139,17 @@ public class FishController : MonoBehaviour
             StartCoroutine("changeFlutter");
         }
 
+        if (isHungry)
+        {
+            isHungry = false;
+            StartCoroutine("feelHungry");
+        }
 
         // Get world position for the mouse
         //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // Get the direction of the mouse relative to the player and rotate the player to said direction
         //direction = mousePosition - (Vector2)transform.position;
-        
+
         //direction = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));    
         angle = Vector2.SignedAngle(transform.up, direction);
 
@@ -186,6 +198,25 @@ public class FishController : MonoBehaviour
         flutter = true;
 
     }
+
+    IEnumerator feelHungry()
+    {
+        //Wait for fishMemory seconds
+        yield return new WaitForSeconds(1f);
+        
+        if (hunger != 0)
+        {
+            hunger--;
+            
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+        isHungry = true;
+    }
+
 
 
     //private void OnTriggerEnter2D(Collider2D collision){
