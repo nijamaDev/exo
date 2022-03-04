@@ -627,6 +627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f99ebf42b8b634da1a4e1e75addd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bornRate: 0.2
+  breedingTime: 10
   fish: {fileID: 2568918556182406654, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
 --- !u!4 &665981485
 Transform:
