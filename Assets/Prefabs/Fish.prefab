@@ -92,9 +92,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.7778766, y: -0.018174523}
+  m_Offset: {x: 1.2356623, y: -0.023882283}
   serializedVersion: 2
-  m_Radius: 1.1979003
+  m_Radius: 1.0754764
 --- !u!1 &2568918555256642661
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 25
+  m_AngularDrag: 20
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -607,9 +607,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 500
-  moveSpeed: 8000
+  moveSpeed: 6000
   fishMemory: 2
-  tail: 5
+  tail: 15
   shoalRadius: 4.5
   cola: {fileID: 2568918555496861024}
   shoal: {fileID: 643489617}

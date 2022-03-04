@@ -42,10 +42,13 @@ public class FishController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider) {
         if (collider.CompareTag("Fish"))
         {
-            fishClose++;
             if (collider.IsTouching(shoal))
             {
                 shoalClose++;
+            }
+            else 
+            {
+                fishClose++;
             }
         }
 
@@ -57,9 +60,7 @@ public class FishController : MonoBehaviour
         
     }
 
-    /*
-     
-     */
+   
     private void OnTriggerStay2D(Collider2D collider)
     {
         if(collider.attachedRigidbody != null)
@@ -91,15 +92,21 @@ public class FishController : MonoBehaviour
                     direction = posn - back;
                 }
                  */
-                if (shoalClose <= collider.GetComponent<FishController>().getShoalClose())
+                if (fishClose != 1 && shoalClose <= collider.GetComponent<FishController>().getShoalClose())
+                // Si el cardumen de otro pez tiene más peces que el propio...
                 {
+                    // Se dirige hacia el "líder".
                     direction = posn - pos0;
                 }
                 else {//SIno seguir al cardumen
-                    posn = collider.GetComponent<Rigidbody2D>().position;
+                    
+                    Vector2 dirF = collider.GetComponent<Rigidbody2D>().position;
                     Vector2 back = collider.transform.GetChild(2).position;
+                    
                     //Debug.Log("cardumen!");
-                    direction = posn - back;
+                    //direction = posn - back;
+                    direction = direction - (posn - pos0);
+                    //(dirF - back) (posn - pos0)
                 }
 
             }
@@ -117,10 +124,13 @@ public class FishController : MonoBehaviour
     {
         if (collider.CompareTag("Fish"))
         {
-            fishClose--;
             if (collider.IsTouching(shoal))
             {
                 shoalClose--;
+            }
+            else 
+            {
+                fishClose--;
             }
         }
 
