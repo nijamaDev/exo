@@ -126,7 +126,7 @@ public class FishController : MonoBehaviour
     {
         //Debug.Log(fishClose);
 
-        if (rotar && fishClose==0)
+        if (rotar && fishClose<2)
         {
             rotar = false;
             StartCoroutine("changeDirection");
