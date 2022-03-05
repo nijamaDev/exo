@@ -13,8 +13,12 @@ public class SharkController : MonoBehaviour
     public float moveSpeed;
     public float fishMemory;//Cada cuanto gira aleatoriamente
     public Rigidbody2D neck;
+    public float hunger = 50;
+    public float minHunger = 20;
 
     Rigidbody2D rb;
+    private float maxHunger;
+    private bool isHungry = true;
     private bool rotar = true;
     private bool flutter = true;
     private bool flutter_dir = true;
@@ -22,24 +26,31 @@ public class SharkController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxHunger = hunger;
         rb = GetComponent<Rigidbody2D>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.CompareTag("Fish")){
+            if (collision.collider.CompareTag("Fish") && isHunting){
+                hunger = hunger + 30;
                 Destroy(collision.gameObject);
             }
         }
 
     private void OnTriggerStay2D(Collider2D collider)
         {
-            if (collider.CompareTag("Fish")){
-                if(collider.GetComponent<FishController>().getShoalClose() < 2){
-                    foodBehaviour(collider);
-                    isHunting = true;
+            if (hunger > minHunger)
+            //Si no tienen hambre, forman un cardumen.
+            {
+                isHunting = false;
+            }else{
+                if (collider.CompareTag("Fish")){
+                    if(collider.GetComponent<FishController>().getShoalClose() < 2){
+                        foodBehaviour(collider);
+                        isHunting = true;
+                    }                
                 }
-                
             }
         }
 
@@ -68,6 +79,11 @@ public class SharkController : MonoBehaviour
         if (flutter) {
             flutter = false;
             StartCoroutine("changeFlutter");
+        }
+
+        if (isHungry) {
+            isHungry = false;
+            StartCoroutine("feelHungry");
         }
 
         // Get world position for the mouse
@@ -115,6 +131,24 @@ public class SharkController : MonoBehaviour
         naturalMovement();
 
         rotar = true;
+    }
+
+    IEnumerator feelHungry()
+    {
+        //Wait for fishMemory seconds
+        yield return new WaitForSeconds(1f);
+        
+        if (hunger != 0)
+        {
+            hunger--;
+            
+        }
+        else
+        {
+            UnityEngine.Object.Destroy(gameObject);
+        }
+
+        isHungry = true;
     }
 
     //-----------------------------------
