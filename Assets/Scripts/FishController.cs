@@ -169,7 +169,6 @@ public class FishController : MonoBehaviour
         naturalMovement();
 
         rotar = true;
-
     }
 
     IEnumerator changeFlutter()
