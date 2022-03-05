@@ -35,8 +35,11 @@ public class SharkController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collider)
         {
             if (collider.CompareTag("Fish")){
-                foodBehaviour(collider);
-                isHunting = true;
+                if(collider.GetComponent<FishController>().getShoalClose() < 2){
+                    foodBehaviour(collider);
+                    isHunting = true;
+                }
+                
             }
         }
 
@@ -108,7 +111,7 @@ public class SharkController : MonoBehaviour
     {
         //Wait for fishMemory seconds
         yield return new WaitForSeconds(fishMemory);
-        //Debug.Log("Cambi� la direcci�n: ");
+        Debug.Log("Cambia la direccion: ");
         naturalMovement();
 
         rotar = true;
