@@ -616,6 +616,7 @@ MonoBehaviour:
   shoal: {fileID: 643489617}
   hunger: 50
   minHunger: 10
+  selFISHness: 0
   lt: {fileID: 2568918555256642666}
 --- !u!61 &708320098
 BoxCollider2D:
@@ -659,5 +660,8 @@ MonoBehaviour:
   - A
   - a
   speedAllele:
+  - F
+  - f
+  selfishnessAllele:
   - S
   - s

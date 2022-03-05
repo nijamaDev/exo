@@ -42,17 +42,25 @@ public class spawn : MonoBehaviour
                         //Instantiate(fish, shoal[i].transform.position, Quaternion.identity);//spawn en la posision
                         GameObject nemo = Instantiate(fish, shoal[hembra].transform.position, Quaternion.identity) as GameObject;
                         FishAlelos fishAlelos = nemo.GetComponent<FishAlelos>();
-
+                        
+                        //COLOR:
                         string aleloH = shoal[hembra].GetComponent<FishAlelos>().getfishColor()[Random.Range(0,2)];
                         string aleloM = shoal[macho].GetComponent<FishAlelos>().getfishColor()[Random.Range(0,2)];
                         string[] alelosNemoC = { aleloH , aleloM };
                         fishAlelos.setfishColor(alelosNemoC);
                         //nemo.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 
+                        //SPEED:
                         aleloH = shoal[hembra].GetComponent<FishAlelos>().getfishSpeed()[Random.Range(0,2)];
                         aleloM = shoal[macho].GetComponent<FishAlelos>().getfishSpeed()[Random.Range(0,2)];
-                        string[] alelosNemoS = { aleloH , aleloM };
-                        nemo.GetComponent<FishAlelos>().setfishSpeed(alelosNemoS);
+                        string[] alelosNemoSp = { aleloH , aleloM };
+                        nemo.GetComponent<FishAlelos>().setfishSpeed(alelosNemoSp);
+
+                        //SELFISHNESS:
+                        aleloH = shoal[hembra].GetComponent<FishAlelos>().getfishSelfishness()[Random.Range(0,2)];
+                        aleloM = shoal[macho].GetComponent<FishAlelos>().getfishSelfishness()[Random.Range(0,2)];
+                        string[] alelosNemoSf = { aleloH , aleloM };
+                        nemo.GetComponent<FishAlelos>().setfishSelfishness(alelosNemoSf);
                     }
         }
         

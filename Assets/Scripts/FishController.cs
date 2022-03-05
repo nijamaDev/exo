@@ -17,7 +17,8 @@ public class FishController : MonoBehaviour
     public Rigidbody2D cola;
     public CircleCollider2D shoal;
     public float hunger = 50;
-    public float minHunger = 15;
+    public float minHunger = 20;
+    public bool selfishness;
 
     Rigidbody2D rb;
     private float maxHunger;
@@ -80,15 +81,15 @@ public class FishController : MonoBehaviour
             //Si están hambrientos, su comportamiento depende de si hay comida cerca o no.
             {
                 if (foodClose == 0)
-                //Si hay comida cerca, se vuelven unos bastardos egoístas.
+                //Si no hay, se mantiene cerca del cardumen para sobrevivir.
                 {
                     if (collider.CompareTag("Fish"))
                     {
-                        shoalBehaviour(collider);
+                        desitionBehaviour(selfishness, collider);
                     }
                 }
                 else
-                //Si no hay, se mantiene cerca del cardumen para sobrevivir.
+                //Si hay comida cerca, se vuelven unos bastardos egoístas.
                 {
                     if (collider.CompareTag("Plancton"))
                     {
@@ -159,12 +160,13 @@ public class FishController : MonoBehaviour
 
     }
 
+    // RUTINAS: --------------------------------------------------------------------------
     IEnumerator changeDirection()
     {
         //Wait for fishMemory seconds
         yield return new WaitForSeconds(fishMemory);
         //Debug.Log("Cambi� la direcci�n: ");
-        direction = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+        naturalMovement();
 
         rotar = true;
 
@@ -214,6 +216,8 @@ public class FishController : MonoBehaviour
         isHungry = true;
     }
 
+    //------------------------------------------------------------------------------------
+
     //Comportamiento en cardumen.
     private void shoalBehaviour(Collider2D collider)
     {
@@ -247,13 +251,33 @@ public class FishController : MonoBehaviour
         //Si el plancton está tocando la nuca, el pez come.
         if (collider.IsTouching(shoal))
         {
-            hunger = hunger + 20;
+            if (hunger < maxHunger)
+            {
+                hunger = 50;
+            }
         }
         //El HAMBRE se puede ajustar posteriormente.
         if (hunger < minHunger)
         {
             direction = posn - pos0;
         }
+    }
+
+    private void desitionBehaviour(bool desition, Collider2D collider)
+    {
+        if (desition)
+        {
+            StartCoroutine("changeDirection");
+        }
+        else
+        { 
+            shoalBehaviour(collider);
+        }
+    }
+
+    private void naturalMovement()
+    {
+        direction = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
     }
 
 

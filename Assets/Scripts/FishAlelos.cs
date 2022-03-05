@@ -6,7 +6,8 @@ public class FishAlelos : MonoBehaviour
 {
     public string[] colorAllele = {"A","a"};
     SpriteRenderer fishSprite;
-    public string[] speedAllele = { "S", "s" };
+    public string[] speedAllele = { "F", "f" };
+    public string[] selfishnessAllele = { "S", "s" };
     FishController fishController;
 
     void Start()
@@ -20,32 +21,53 @@ public class FishAlelos : MonoBehaviour
 
         // Speed. 
         fishController = GetComponent<FishController>();
-        if (speedAllele[0] == "S" || speedAllele[1] == "S")
+        if (speedAllele[0] == "F" || speedAllele[1] == "F")
         {
             fishController.moveSpeed = 8000;
         }
         else fishController.moveSpeed = 4000;
 
+        // Selfishness. 
+        if (selfishnessAllele[0] == "S" || selfishnessAllele[1] == "S")
+        {
+            fishController.selfishness = false;
+        }
+        else fishController.selfishness = true;
+
     }
         
     // Start is called before the first frame update
+
+    // Set&Get del color. -----------------------------
     public void setfishColor(string[] bornColor){
         colorAllele = bornColor;
     }
-
     public string[] getfishColor(){
         return colorAllele;
     }
+    //-------------------------------------------------
 
-    public void setfishSpeed(string[] bornColor)
+    // Set&Get de la velocidad. -----------------------
+    public void setfishSpeed(string[] bornSpeed)
     {
-        speedAllele = bornColor;
+        speedAllele = bornSpeed;
     }
-
     public string[] getfishSpeed()
     {
         return speedAllele;
     }
+    //-------------------------------------------------
+
+    // Set&Get del egoísmo. ---------------------------
+    public void setfishSelfishness(string[] bornSelfishness)
+    {
+        selfishnessAllele = bornSelfishness;
+    }
+    public string[] getfishSelfishness()
+    {
+        return selfishnessAllele;
+    }
+    //-------------------------------------------------
 
     void Update(){
         

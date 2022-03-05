@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &207624223
 Rigidbody2D:
   serializedVersion: 4
@@ -861,9 +861,17 @@ PrefabInstance:
       propertyPath: colorAllele.Array.data[0]
       value: A
       objectReference: {fileID: 0}
+    - target: {fileID: 1296790222, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
+      propertyPath: selfishnessAllele.Array.data[1]
+      value: S
+      objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406595, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: hunger
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568918556182406595, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
+      propertyPath: selFISHness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406652, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_Color.b
@@ -871,11 +879,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406652, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_Color.g
-      value: 0.30387497
+      value: 0.82562953
       objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406652, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_Color.r
-      value: 0.8773585
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406653, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_RootOrder
@@ -1350,7 +1358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!58 &2117233174
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1462,21 +1470,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1296790222, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
+      propertyPath: selfishnessAllele.Array.data[1]
+      value: S
+      objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406595, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: hunger
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2568918556182406595, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
+      propertyPath: selFISHness
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406652, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_Color.b
-      value: 0.10323961
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406652, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_Color.g
-      value: 0.29447618
+      value: 0.027907036
       objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406652, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_Color.r
-      value: 0.754717
+      value: 0.2830189
       objectReference: {fileID: 0}
     - target: {fileID: 2568918556182406653, guid: 3784c642bac418042bf9177bdbb11159, type: 3}
       propertyPath: m_RootOrder
