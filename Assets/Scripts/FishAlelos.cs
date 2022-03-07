@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishAlelos : MonoBehaviour
 {
-    public string[] colorAllele = {"A","a"};
+    public string[] colorAllele = {"A","a"};//{"D4f,2f,6f","N1.0f,1.0f,1.0f"} A > M > a
     SpriteRenderer fishSprite;
     public string[] speedAllele = { "F", "f" };
     public string[] selfishnessAllele = { "S", "s" };
@@ -14,10 +14,15 @@ public class FishAlelos : MonoBehaviour
     {
         // Color.
         fishSprite = GetComponent<SpriteRenderer>();        
-        if(colorAllele[0] == "A" || colorAllele[1] == "A")
+        if(colorAllele[0][0].ToString() == "A" || colorAllele[1][0].ToString() == "A")//Cuando sea dominante naranja pone naranja
         {
-            fishSprite.color = new Color(1.26f, 0.29f, 0.1f);
-        }else fishSprite.color = Color.white;
+            fishSprite.color = new Color(1.00f, 0.29f, 0.1f);//naranjita
+        }else if(colorAllele[0][0].ToString() == "a" && colorAllele[1][0].ToString() == "a"){
+            fishSprite.color = Color.white;
+        }else if(colorAllele[0][0].ToString() == "M"){//Si la mama es M pone a la mama, sino al papá
+            fishSprite.color = parseToColor(colorAllele[0]);
+        }else fishSprite.color = parseToColor(colorAllele[1]);
+
         // Speed. 
         fishController = GetComponent<FishController>();
         if (speedAllele[0] == "F" || speedAllele[1] == "F")
@@ -68,22 +73,14 @@ public class FishAlelos : MonoBehaviour
     }
     //-------------------------------------------------
 
-    void Update(){
-        parseToColor("ADN");
-    }
-
-    string parseToString(Color alele)//"N0.6f,0.5f,0.7f" A > D > N
+    Color parseToColor(string alele)//"N0.6f,0.5f,0.7f" A > M > a
     {
-        //Debug.Log(alele[0]);
-        Debug.Log(new Color(1,1,1).ToString()[4]);
-        return alele.ToString();
-    }
+        //Debug.Log(alele.Substring(11,13));
+        float R = float.Parse(alele.Substring(1,3))/10;
+        float G = float.Parse(alele.Substring(6,3))/10;
+        float B = float.Parse(alele.Substring(11,3))/10;
 
-    Color parseToColor(string alele)//"N0.6f,0.5f,0.7f" A > D > N
-    {
-        //Debug.Log(alele[0]);
-        Debug.Log(new Color(1,1,1).ToString()[4]);
-        return Color.white;
+        return new Color(R,G,B);
     }
     //-------------------------------------------------
 

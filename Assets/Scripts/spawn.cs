@@ -8,6 +8,7 @@ public class spawn : MonoBehaviour
     public float breedingTime = 10f;
     public float planktonTime = 10f;
     public int planktonMaxSize = 13;
+    public float mutationRate = 0.1f;
     public float xpos = 60f;
     public float xneg = 0f;
     public float ypos = 60f;
@@ -62,7 +63,17 @@ public class spawn : MonoBehaviour
                         //COLOR:
                         string aleloH = shoal[hembra].GetComponent<FishAlelos>().getfishColor()[Random.Range(0,2)];
                         string aleloM = shoal[macho].GetComponent<FishAlelos>().getfishColor()[Random.Range(0,2)];
+
+                        //¿Va a mutar?
+                        if(Random.Range(0.0f,1.0f)<=mutationRate){
+                            aleloH = colorParseToString(new Color(Random.Range(0.2f,1.0f),Random.Range(0.2f,1.0f),Random.Range(0.2f,1.0f)));
+                        }
+                        if(Random.Range(0.0f,1.0f)<=mutationRate){
+                            aleloM = colorParseToString(new Color(Random.Range(0.2f,1.0f),Random.Range(0.2f,1.0f),Random.Range(0.2f,1.0f)));
+                        }
+
                         string[] alelosNemoC = { aleloH , aleloM };
+                        
                         fishAlelos.setfishColor(alelosNemoC);
                         //nemo.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 
@@ -97,5 +108,12 @@ public class spawn : MonoBehaviour
 
             isPlanktonTime = true;
         }
+    //asignar alelos
+    string colorParseToString(Color alele)//"N6f,5f,7f" A > M > a
+    {
+        //Debug.Log(alele[0]);
+        //Debug.Log(alele.ToString());
+        return "M"+alele.ToString().Substring(5,3)+"f,"+alele.ToString().Substring(12,3)+"f,"+alele.ToString().Substring(19,3)+"f";
+    }
 
 }

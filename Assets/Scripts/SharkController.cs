@@ -169,5 +169,6 @@ public class SharkController : MonoBehaviour
     private void naturalMovement()
     {
         direction = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+
     }
 }

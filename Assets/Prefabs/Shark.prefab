@@ -256,7 +256,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 20
+  m_PointLightOuterRadius: 24
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -282,7 +282,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 24
 --- !u!1 &113285271731835385
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,12 +519,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 200
   impulseSpeed: 25
-  moveSpeed: 50000
+  moveSpeed: 45000
   huntSpeed: 100000
   fishMemory: 1
   neck: {fileID: 113285272714396733}
   hunger: 50
-  minHunger: 46
+  minHunger: 47
 --- !u!70 &188776325596537083
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
