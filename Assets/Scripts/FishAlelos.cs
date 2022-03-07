@@ -18,7 +18,6 @@ public class FishAlelos : MonoBehaviour
         {
             fishSprite.color = new Color(1.26f, 0.29f, 0.1f);
         }else fishSprite.color = Color.white;
-
         // Speed. 
         fishController = GetComponent<FishController>();
         if (speedAllele[0] == "F" || speedAllele[1] == "F")
@@ -58,7 +57,7 @@ public class FishAlelos : MonoBehaviour
     }
     //-------------------------------------------------
 
-    // Set&Get del egoísmo. ---------------------------
+    // Set&Get del egoï¿½smo. ---------------------------
     public void setfishSelfishness(string[] bornSelfishness)
     {
         selfishnessAllele = bornSelfishness;
@@ -70,7 +69,22 @@ public class FishAlelos : MonoBehaviour
     //-------------------------------------------------
 
     void Update(){
-        
-
+        parseToColor("ADN");
     }
+
+    string parseToString(Color alele)//"N0.6f,0.5f,0.7f" A > D > N
+    {
+        //Debug.Log(alele[0]);
+        Debug.Log(new Color(1,1,1).ToString()[4]);
+        return alele.ToString();
+    }
+
+    Color parseToColor(string alele)//"N0.6f,0.5f,0.7f" A > D > N
+    {
+        //Debug.Log(alele[0]);
+        Debug.Log(new Color(1,1,1).ToString()[4]);
+        return Color.white;
+    }
+    //-------------------------------------------------
+
 }

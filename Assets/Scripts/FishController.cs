@@ -44,7 +44,6 @@ public class FishController : MonoBehaviour
     {
         return shoalClose;
     }
-
     private void OnTriggerEnter2D(Collider2D collider) {
         if (collider.CompareTag("Fish"))
         {
@@ -246,6 +245,7 @@ public class FishController : MonoBehaviour
     {
         Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
         Vector2 pos0 = transform.position;//rb.position;//
+        planktonController planktonObject = collider.GetComponent<planktonController>();
         //Ir por comida
         //Si el plancton está tocando la nuca, el pez come.
         if (collider.IsTouching(shoal))
@@ -253,6 +253,7 @@ public class FishController : MonoBehaviour
             if (hunger < maxHunger)
             {
                 hunger = 50;
+                planktonObject.removeHealth();
             }
         }
         //El HAMBRE se puede ajustar posteriormente.

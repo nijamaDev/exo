@@ -11,12 +11,14 @@ public class SharkController : MonoBehaviour
     public float turnSpeed;
     public float impulseSpeed;
     public float moveSpeed;
+    public float huntSpeed;
     public float fishMemory;//Cada cuanto gira aleatoriamente
     public Rigidbody2D neck;
     public float hunger = 50;
     public float minHunger = 20;
 
     Rigidbody2D rb;
+    private float ogMoveSpeed;
     private float maxHunger;
     private bool isHungry = true;
     private bool rotar = true;
@@ -26,6 +28,7 @@ public class SharkController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ogMoveSpeed = moveSpeed;
         maxHunger = hunger;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -86,6 +89,9 @@ public class SharkController : MonoBehaviour
             StartCoroutine("feelHungry");
         }
 
+        if(isHunting){
+            moveSpeed = huntSpeed;
+        } else moveSpeed = ogMoveSpeed;
         // Get world position for the mouse
         // mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // Get the direction of the mouse relative to the player and rotate the player to said direction
@@ -127,7 +133,7 @@ public class SharkController : MonoBehaviour
     {
         //Wait for fishMemory seconds
         yield return new WaitForSeconds(fishMemory);
-        Debug.Log("Cambia la direccion: ");
+        //Debug.Log("Cambia la direccion: ");
         naturalMovement();
 
         rotar = true;
