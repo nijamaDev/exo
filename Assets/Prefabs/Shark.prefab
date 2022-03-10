@@ -519,7 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 200
   impulseSpeed: 25
-  moveSpeed: 45000
+  moveSpeed: 10000
   huntSpeed: 100000
   fishMemory: 1
   neck: {fileID: 113285272714396733}

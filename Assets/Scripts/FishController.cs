@@ -10,6 +10,7 @@ public class FishController : MonoBehaviour
   float impulse;
   public float turnSpeed;
   public float moveSpeed;
+  public float flightSpeed;
   public float fishMemory;//Cada cuanto gira aleatoriamente
   public float tail;//que tan fuerte mueve la cola
   public float shoalRadius = 12;
@@ -20,21 +21,26 @@ public class FishController : MonoBehaviour
   public bool selfishness;
 
   Rigidbody2D rb;
-  private float maxHunger;
   private int shoalClose = 0;
   private int fishClose = 0;
   private int foodClose = 0;
+  private int sharkClose = 0;
+  private float maxHunger;
   private bool rotar = true;
   private bool isHungry = true;
   private bool flutter = true;
   private bool flutter_dir = true;
+  private bool isFleeing = false;
+  private float ogMoveSpeed;
 
-  //public Transform playerLight;
-  public Light2D lt;
+    //public Transform playerLight;
+    public Light2D lt;
   // Start is called before the first frame update
 
   void Start()
   {
+    ogMoveSpeed = moveSpeed;
+    flightSpeed = moveSpeed * 3;
     maxHunger = hunger;
     rb = GetComponent<Rigidbody2D>();
   }
@@ -60,6 +66,11 @@ public class FishController : MonoBehaviour
     if (collider.CompareTag("Plancton"))
     {
       foodClose++;
+    }
+
+    if (collider.CompareTag("Shark"))
+    {
+      sharkClose++;
     }
 
   }
@@ -88,7 +99,7 @@ public class FishController : MonoBehaviour
           }
         }
         else
-        //Si hay comida cerca, se vuelven unos bastardos egoístas.
+        //Si hay comida cerca, se vuelven unos egoístas.
         {
           if (collider.CompareTag("Plancton"))
           {
@@ -96,32 +107,57 @@ public class FishController : MonoBehaviour
           }
         }
       }
+
+      if (collider.CompareTag("Shark"))
+      {
+        if (sharkClose >= shoalClose/800)
+        {
+            isFleeing = true;
+            flightBehaviour(collider);
+        }
+        else
+        {
+            isFleeing = false;
+        }
+      }
     }
   }
 
-  private void OnTriggerExit2D(Collider2D collider)
-  {
-    if (collider.CompareTag("Fish"))
+    private void OnTriggerExit2D(Collider2D collider)
     {
-      if (collider.IsTouching(shoal))
-      {
-        shoalClose--;
-      }
-      else
-      {
-        fishClose--;
-      }
+        if (collider.CompareTag("Fish"))
+        {
+            if (collider.IsTouching(shoal))
+            {
+                shoalClose--;
+            }
+            else
+            {
+                fishClose--;
+            }
+        }
+
+        if (collider.CompareTag("Plancton"))
+        {
+            foodClose--;
+        }
+        if (collider.CompareTag("Shark"))
+        {
+            sharkClose--;
+        }
     }
 
-    if (collider.CompareTag("Plancton"))
+    /*void OnCollisionExit2D(Collision2D collision)
     {
-      foodClose--;
-    }
-  }
+        if (collider.CompareTag("Shark"))
+        {
+            sharkClose--;
+        }
+    }*/
 
 
-  // Update is called once per frame
-  void FixedUpdate()
+    // Update is called once per frame
+    void FixedUpdate()
   {
     //Debug.Log(fishClose);
 
@@ -142,6 +178,11 @@ public class FishController : MonoBehaviour
       isHungry = false;
       StartCoroutine("feelHungry");
     }
+
+    if (isFleeing)
+    {
+        moveSpeed = flightSpeed;
+    } else moveSpeed = ogMoveSpeed;
 
     // Get world position for the mouse
     //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -283,6 +324,14 @@ public class FishController : MonoBehaviour
     direction = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
   }
 
+  //Comportamiento con tiburón
+  private void flightBehaviour(Collider2D collider)
+  {
+    Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
+    Vector2 pos0 = transform.position;//rb.position;//
+
+    direction = posn + pos0;
+  }
 
   //private void OnTriggerEnter2D(Collider2D collision){
   //  Destroy(gameObject);
