@@ -70,7 +70,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.78009963}
+  m_ConnectedAnchor: {x: 0, y: 0.78009987}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 6
+  m_PointLightOuterRadius: 12
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -221,7 +221,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 6
+  m_Radius: 12
 --- !u!1 &2568918555496860957
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.58855665, y: 0.0000005168566}
+  m_ConnectedAnchor: {x: 0.5885562, y: 0.0000005168561}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -369,7 +369,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.3935179, y: -0.0034823236}
+  m_ConnectedAnchor: {x: 0.39351815, y: -0.0034823257}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -447,7 +447,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.33082727, y: 0.00348253}
+  m_ConnectedAnchor: {x: 0.3308275, y: 0.0034825325}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -538,7 +538,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 68cb5e2ccb7ce1340bfe08030c9cb54f, type: 3}
   m_Color: {r: 0.5230064, g: 0.60766524, b: 0.6886792, a: 1}
   m_FlipX: 0
@@ -609,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 500
   moveSpeed: 6000
+  flightSpeed: 0
   fishMemory: 2
   tail: 15
   shoalRadius: 4.5

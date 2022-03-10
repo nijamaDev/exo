@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 188776325596537083}
   m_Layer: 0
   m_Name: Shark
-  m_TagString: Untagged
+  m_TagString: Shark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,7 +445,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 6245dd682a12bfb44985a0577fe57a69, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -498,7 +498,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 30
   m_LinearDrag: 5
-  m_AngularDrag: 80
+  m_AngularDrag: 100
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -519,12 +519,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 200
   impulseSpeed: 25
-  moveSpeed: 10000
+  moveSpeed: 60000
   huntSpeed: 100000
-  fishMemory: 1
+  fishMemory: 2
   neck: {fileID: 113285272714396733}
-  hunger: 50
-  minHunger: 47
+  hunger: 70
+  minHunger: 30
+  predatingDistance: 250
+  spawn: {fileID: 0}
 --- !u!70 &188776325596537083
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

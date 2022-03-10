@@ -40,7 +40,7 @@ public class FishController : MonoBehaviour
   void Start()
   {
     ogMoveSpeed = moveSpeed;
-    flightSpeed = moveSpeed * 3;
+    flightSpeed = moveSpeed * 4;
     maxHunger = hunger;
     rb = GetComponent<Rigidbody2D>();
   }
@@ -70,9 +70,9 @@ public class FishController : MonoBehaviour
 
     if (collider.CompareTag("Shark"))
     {
-      sharkClose++;
+        sharkClose++;
+        //flightBehaviour(selfishness, collider);
     }
-
   }
 
   private void OnTriggerStay2D(Collider2D collider)
@@ -82,6 +82,11 @@ public class FishController : MonoBehaviour
       if (hunger > minHunger)
       //Si no tienen hambre, forman un cardumen.
       {
+        if (collider.CompareTag("Shark"))
+        {
+          sharkClose++;
+          flightBehaviour(selfishness, collider);
+        }
         if (collider.CompareTag("Fish"))
         {
           shoalBehaviour(collider);
@@ -93,31 +98,31 @@ public class FishController : MonoBehaviour
         if (foodClose == 0)
         //Si no hay, se mantiene cerca del cardumen para sobrevivir.
         {
-          if (collider.CompareTag("Fish"))
-          {
-            desitionBehaviour(selfishness, collider);
-          }
+            if (collider.CompareTag("Shark"))
+            {
+              sharkClose++;
+              flightBehaviour(selfishness, collider);
+            }
+            if (collider.CompareTag("Fish"))
+            {
+                desitionBehaviour(selfishness, collider);
+            }
         }
         else
         //Si hay comida cerca, se vuelven unos egoístas.
         {
           if (collider.CompareTag("Plancton"))
           {
-            foodBehaviour(collider);
+              /*f (foodClose > sharkClose)
+              {*/
+                 foodBehaviour(collider);
+              /*}
+             else 
+             {
+                 sharkClose++;
+                 flightBehaviour(selfishness, collider);
+             }*/
           }
-        }
-      }
-
-      if (collider.CompareTag("Shark"))
-      {
-        if (sharkClose >= shoalClose/800)
-        {
-            isFleeing = true;
-            flightBehaviour(collider);
-        }
-        else
-        {
-            isFleeing = false;
         }
       }
     }
@@ -141,20 +146,13 @@ public class FishController : MonoBehaviour
         {
             foodClose--;
         }
+
         if (collider.CompareTag("Shark"))
         {
             sharkClose--;
+            isFleeing = false;
         }
     }
-
-    /*void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collider.CompareTag("Shark"))
-        {
-            sharkClose--;
-        }
-    }*/
-
 
     // Update is called once per frame
     void FixedUpdate()
@@ -208,7 +206,7 @@ public class FishController : MonoBehaviour
     yield return new WaitForSeconds(fishMemory);
     //Debug.Log("Cambi� la direcci�n: ");
     naturalMovement();
-
+    isFleeing = false;
     rotar = true;
   }
 
@@ -266,7 +264,7 @@ public class FishController : MonoBehaviour
     Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
     Vector2 pos0 = transform.position;//rb.position;//
                                       //Comportamiento de cardumen.
-    if (fishClose != 1 && shoalClose <= collider.GetComponent<FishController>().getShoalClose())
+    if (fishClose > 1 && shoalClose <= collider.GetComponent<FishController>().getShoalClose())
     // Si el cardumen de otro pez tiene m�s peces que el propio...
     {
       // Se dirige hacia el "l�der".
@@ -325,12 +323,20 @@ public class FishController : MonoBehaviour
   }
 
   //Comportamiento con tiburón
-  private void flightBehaviour(Collider2D collider)
-  {
-    Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
-    Vector2 pos0 = transform.position;//rb.position;//
+  private void flightBehaviour(bool desision, Collider2D collider)
+    {
+        isFleeing = true;
+        if (desision)
+        {
+            StartCoroutine("changeDirection");
+        }
+        else 
+        {
+            Vector2 posn = collider.GetComponent<Transform>().position;//collider.attachedRigidbody.position;
+            Vector2 pos0 = transform.position;//rb.position;//
 
-    direction = posn + pos0;
+            direction = posn + pos0;
+        }
   }
 
   //private void OnTriggerEnter2D(Collider2D collision){
