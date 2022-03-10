@@ -12,9 +12,9 @@ Link de este repositorio en github:
 
 ### Integrantes:
 
-Juan José Dorado   1827439 - Git-Fanfo
-Nicolás Jaramillo    1840558 - kiinTheDovah
-Sara Maradiago       1741648 - SJMC29
+- Juan José Dorado   1827439 - Git-Fanfo
+- Nicolás Jaramillo    1840558 - kiinTheDovah
+- Sara Maradiago       1741648 - SJMC29
 
 ## Instrucciones de instalación
 
