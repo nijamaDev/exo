@@ -44,7 +44,7 @@ public class SharkController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Fish") && isHunting)
         {
-            hunger = hunger + 25;
+            hunger = hunger + 30;
             Destroy(collision.gameObject);
             isHungry = false;
             isHunting = false;
@@ -214,12 +214,11 @@ public class SharkController : MonoBehaviour
         if (hunger != 0)
         {
             hunger--;
-
         }
-        else
+        /*else
         {
             UnityEngine.Object.Destroy(gameObject);
-        }
+        }*/
 
         isHungry = true;
     }
@@ -252,14 +251,12 @@ public class SharkController : MonoBehaviour
     private void naturalMovement()
     {
         isHunting = false;
-        Debug.Log("Toy bien");
 
         Debug.Log(planctonClose);
         Debug.Log(foodClose);
 
         if (planctonClose == 0 && foodClose == 0)
         {
-            Debug.Log("Debo volver");
             //Que el tiburón vuelva a su territorio.
             direction = posZero - (Vector2)transform.position;
         }

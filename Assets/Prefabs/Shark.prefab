@@ -523,8 +523,8 @@ MonoBehaviour:
   huntSpeed: 100000
   fishMemory: 2
   neck: {fileID: 113285272714396733}
-  hunger: 70
-  minHunger: 30
+  hunger: 80
+  minHunger: 40
   predatingDistance: 250
   spawn: {fileID: 0}
 --- !u!70 &188776325596537083

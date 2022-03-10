@@ -243,10 +243,9 @@ public class FishController : MonoBehaviour
     //Wait for fishMemory seconds
     yield return new WaitForSeconds(1f);
 
-    if (hunger != 0)
+    if (hunger > 0)
     {
       hunger--;
-
     }
     else
     {
@@ -269,6 +268,7 @@ public class FishController : MonoBehaviour
     {
       // Se dirige hacia el "l�der".
       direction = posn - pos0;
+      angle = angle + Mathf.PingPong(Time.time/2, 10)-5;
     }
     else
     {//SIno seguir al cardumen
