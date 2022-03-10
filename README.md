@@ -23,4 +23,4 @@ Sara Maradiago       1741648 - SJMC29
 
 [https://unity3d.com/get-unity/download/archive](https://unity3d.com/get-unity/download/archive)
 
-1. Abrir la carpeta de este proyecto con Unity (o utilizar UnityHub para manejar el proyecto y las versiones de Unity)
+3. Abrir la carpeta de este proyecto con Unity (o utilizar UnityHub para manejar el proyecto y las versiones de Unity)
